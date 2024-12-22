@@ -14,20 +14,18 @@ impl Scheduler {
         }
     }
 
-    // 向调度器添加任务
     pub fn add_task(&self, task: Task) {
         let mut tasks = self.tasks.lock().unwrap();
         tasks.push(task);
     }
 
-    // 运行所有任务
     pub fn run(&self) {
         loop {
             let tasks = self.tasks.lock().unwrap();
             for task in tasks.iter() {
                 println!("Running task: {} - {}", task.id, task.name);
                 // 模拟协程的执行
-                thread::sleep(Duration::from_millis(100));
+                thread::sleep(Duration::from_millis(1000));
             }
         }
     }
